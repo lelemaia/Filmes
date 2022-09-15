@@ -1,4 +1,4 @@
-package br.com.fiap.model;
+package br.com.fiap;
 
 
 public class Filme implements Comparable {
