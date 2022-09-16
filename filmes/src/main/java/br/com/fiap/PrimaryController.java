@@ -24,6 +24,7 @@ public class PrimaryController implements Initializable{
     String[] listaSimNao = {"sim", "não"};
 
     private List<Filme> lista = new ArrayList<>();
+    private List<Filme> listaNAssitidos= new ArrayList<>();
 
 
     @Override
@@ -40,6 +41,9 @@ public class PrimaryController implements Initializable{
       
 
         Filme filme = new Filme(titulo, descricao, (double) nota, genero, assistidos);
+        if(assistidos == "não"){
+            listaNAssitidos.add(filme);
+        }
         lista.add(filme);
 
         atualizarList();
@@ -68,11 +72,9 @@ public class PrimaryController implements Initializable{
 
         listView.getItems().clear();
         listView.getItems().addAll(lista);
-        for (int i = 0; i < lista.size(); i++){
-            System.out.println(lista.get(i));
-            }
-        }
-    }
+        listViewNaoAssistidos.getItems().clear();
+        listViewNaoAssistidos.getItems().addAll(listaNAssitidos);
+    }}
 
 
 
