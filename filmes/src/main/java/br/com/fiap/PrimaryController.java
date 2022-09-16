@@ -52,19 +52,19 @@ public class PrimaryController implements Initializable{
 
     public void ordenarNota(){
         lista.sort((o1, o2) -> Double.compare(o1.getNota(), o2.getNota()) );
-
         atualizarList();
-
     }
 
 
     public void ordenarCategoria(){
         lista.sort((o1, o2) -> o1.getGenero().compareTo(o2.getGenero()));
+        atualizarList();
     }
 
 
     public void ordenarTitulo(){
         lista.sort((o1, o2) -> o1.getTitulo().compareTo(o2.getTitulo()));
+        atualizarList();
     }
 
 
