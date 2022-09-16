@@ -1,10 +1,13 @@
 package br.com.fiap;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-import br.com.fiap.model.Filme;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
@@ -14,7 +17,6 @@ public class PrimaryController implements Initializable{
     @FXML private TextField textFieldDescricao;
     @FXML private TextField textFieldNota;
     @FXML private TextField textFieldGenero;
-    @FXML private TextField textFieldCategoria;
     @FXML private ChoiceBox<String> choiceBox;
     @FXML private ListView<Filme> listView;
     @FXML private ListView<Filme> listViewNaoAssistidos;
@@ -32,13 +34,12 @@ public class PrimaryController implements Initializable{
     public void salvar(){
         String titulo = textFieldTitulo.getText();
         String descricao = textFieldDescricao.getText();
-        int nota = Integer.valueOf(textFieldNota.getText());
+        Double nota = Double.valueOf(textFieldNota.getText());
         String genero = textFieldGenero.getText();
-        String categoria = textFieldCategoria.getText();
-        String assistidos = choiceBox.getvalue();
+        String assistidos = choiceBox.getValue();
       
 
-        Filme filme = new Filme(titulo, descricao, nota, genero, categoria, assistidos);
+        Filme filme = new Filme(titulo, descricao, (double) nota, genero, assistidos);
         lista.add(filme);
 
         atualizarList();
@@ -46,15 +47,15 @@ public class PrimaryController implements Initializable{
     }
 
     public void ordenarNota(){
-        lista.sort((o1, o2) -> Integer.compare(o1.getNota(), o2.getNota()) );
+        lista.sort((o1, o2) -> Double.compare(o1.getNota(), o2.getNota()) );
 
-        atualizarListView();
+        atualizarList();
 
     }
 
 
     public void ordenarCategoria(){
-        lista.sort((o1, o2) -> o1.getCategoria().compareTo(o2.getCategoria()));
+        lista.sort((o1, o2) -> o1.getGenero().compareTo(o2.getGenero()));
     }
 
 
@@ -65,11 +66,16 @@ public class PrimaryController implements Initializable{
 
     public void atualizarList(){
 
-        ListView.getItems().clear();
+        listView.getItems().clear();
         listView.getItems().addAll(lista);
+        for (int i = 0; i < lista.size(); i++){
+            System.out.println(lista.get(i));
+            }
+        }
     }
 
-}
+
+
 
 
 
